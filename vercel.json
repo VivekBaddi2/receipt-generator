@@ -1,9 +1,0 @@
-{
-  "functions": {
-    "src/app/api/generate-pdf/route.js": {
-      "memory": 2048,
-      "maxDuration": 60,
-      "includeFiles": "node_modules/@sparticuz/chromium/**"
-    }
-  }
-}
