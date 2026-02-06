@@ -11,10 +11,22 @@ export async function generatePDF(htmlContent) {
   try {
     if (isServerless) {
       // ✅ Vercel / Lambda
+      let executablePath = await chromium.executablePath();
+
+      // Fallback for Vercel builds
+      if (!executablePath || executablePath.includes("undefined")) {
+        try {
+          const chromiumMin = (await import("@sparticuz/chromium-min")).default;
+          executablePath = await chromiumMin.executablePath();
+        } catch (e) {
+          console.warn("Fallback to chromium-min failed, using default path");
+        }
+      }
+
       browser = await puppeteerCore.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
+        executablePath: executablePath,
         headless: chromium.headless,
       });
     } else {
