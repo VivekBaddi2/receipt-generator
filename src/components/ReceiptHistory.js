@@ -17,7 +17,9 @@ export default function ReceiptHistory({ onViewReceipt }) {
     const fetchReceipts = async () => {
         try {
             setLoading(true);
-            const response = await fetch('/api/receipts');
+            const response = await fetch('/api/receipts', {
+                cache: "no-store"
+            });
 
             if (!response.ok) {
                 throw new Error('Failed to fetch receipts');
@@ -42,6 +44,7 @@ export default function ReceiptHistory({ onViewReceipt }) {
         try {
             const response = await fetch(`/api/receipts/${receiptNo}`, {
                 method: 'DELETE',
+                cache: "no-store"
             });
 
             if (!response.ok) {

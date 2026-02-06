@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import { NextResponse } from 'next/server';
 import connectDB from '../../../lib/mongodb';
 import Receipt from '../../../models/Receipt';
@@ -5,7 +8,7 @@ import Receipt from '../../../models/Receipt';
 export async function GET() {
   try {
     await connectDB();
-    
+
     const receipts = await Receipt.find({})
       .sort({ createdAt: -1 })
       .limit(50);
