@@ -7,7 +7,6 @@ import { generateReceiptHTML } from '../../../utils/receiptTemplate';
 export async function POST(request) {
   try {
     const receiptData = await request.json();
-    console.log(receiptData)
 
     // Connect to database
     await connectDB();

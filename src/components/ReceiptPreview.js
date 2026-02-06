@@ -55,7 +55,7 @@ export default function ReceiptPreview({ receipt }) {
         }
 
         .info-value {
-          width: 25%;
+          width: 40%;
         }
 
         .address-cell {
@@ -168,11 +168,6 @@ export default function ReceiptPreview({ receipt }) {
           <div className="info-row">
             <div className="info-cell info-label">Address :</div>
             <div className="info-cell address-cell">{receipt.address}</div>
-          </div>
-
-          <div className="info-row">
-            <div className="info-cell info-label"></div>
-            <div className="info-cell info-value"></div>
             <div className="info-cell info-label">Receipt Amount :</div>
             <div className="info-cell info-value">{receipt.amount.toFixed(2)}</div>
           </div>
@@ -217,7 +212,7 @@ export default function ReceiptPreview({ receipt }) {
         <table className="data-table">
           <thead>
             <tr>
-              <th style={{ width: '5%' }}>Sr1.</th>
+              <th style={{ width: '5%' }}>Srl.</th>
               <th style={{ width: '12%' }}>Mode</th>
               <th style={{ width: '15%' }}>DD/CC/CHQ No.Date</th>
               <th style={{ width: '12%' }}>Favouring</th>

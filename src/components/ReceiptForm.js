@@ -1,11 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { generateReceiptNumber, numberToIndianWords, formatDate } from '../utils/helpers';
 
 export default function ReceiptForm({ onSubmit, loading }) {
+  // Fetch the next receipt number on component mount
+  useEffect(() => {
+    const fetchReceiptNumber = async () => {
+      try {
+        generateReceiptNumber().then(receiptNo => {
+          setFormData(prev => ({
+            ...prev,
+            receiptNo
+          }));
+        });
+      } catch (error) {
+        console.error('Error fetching receipt number:', error);
+      }
+    };
+
+    fetchReceiptNumber();
+  }, []);
+
   const [formData, setFormData] = useState({
-    receiptNo: generateReceiptNumber(),
+    receiptNo: "",
     receiptDate: new Date().toISOString().split('T')[0],
     name: '',
     customerId: '2458017400',
@@ -32,11 +50,11 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const amountInWords = numberToIndianWords(parseFloat(formData.amount));
     const receiptDate = formatDate(formData.receiptDate);
     const depositDate = formData.depositDate ? formatDate(formData.depositDate) : '';
-    
+
     const receipt = {
       ...formData,
       amount: parseFloat(formData.amount),
@@ -44,7 +62,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
       receiptDate,
       depositDate,
     };
-    
+
     onSubmit(receipt);
   };
 
@@ -63,7 +81,6 @@ export default function ReceiptForm({ onSubmit, loading }) {
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             required
-            readOnly
           />
         </div>
 

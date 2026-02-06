@@ -9,7 +9,7 @@ export function generateReceiptHTML(receipt) {
   <style>
     @page {
       size: A4;
-      margin: 15mm;
+      margin: 5mm;
     }
 
     * {
@@ -37,8 +37,8 @@ export function generateReceiptHTML(receipt) {
 
      .receipt-header {
           text-align: center;
-          padding: 12px 0;
           padding-bottom: 4px;
+          padding-top: 4px;
         }
 
         .receipt-title {
@@ -229,11 +229,6 @@ export function generateReceiptHTML(receipt) {
       <div class="info-row address-row">
         <div class="info-cell info-label">Address</div>
         <div class="info-cell address-cell">: ${receipt.address}</div>
-      </div>
-      
-      <div class="info-row address-row">
-        <div class="info-cell info-label"></div>
-        <div class="info-cell info-value"></div>
         <div class="info-cell info-label">Receipt Amount</div>
         <div class="info-cell info-value">: ${receipt.amount.toFixed(2)}</div>
       </div>
