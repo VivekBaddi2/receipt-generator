@@ -284,15 +284,15 @@ export function generateReceiptHTML(receipt) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>${receipt.paymentMode}</td>
-            <td>${receipt.chequeNo}</td>
-            <td></td>
-            <td>${receipt.depositBank ? 'DATE ' + receipt.depositDate : ''}</td>
-            <td>${receipt.depositBank}</td>
-            <td>${receipt.amount.toFixed(2)}</td>
-          </tr>
+         <tr>
+              <td>1</td>
+              <td>${receipt.paymentMode}</td>
+              <td>${receipt.chequeNo} <br /> ${receipt.depositBank ? 'DATE ' + receipt.depositDate : ''} </td>
+              <td></td>
+              <td>${receipt.depositBank ? receipt.depositBank : ''}</td>
+              <td></td>
+              <td>${receipt.amount.toFixed(2)}</td>
+            </tr>
         </tbody>
       </table>
       

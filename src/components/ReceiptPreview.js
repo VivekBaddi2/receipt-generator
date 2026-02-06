@@ -225,10 +225,10 @@ export default function ReceiptPreview({ receipt }) {
             <tr>
               <td>1</td>
               <td>{receipt.paymentMode}</td>
-              <td>{receipt.chequeNo}</td>
+              <td>{receipt.chequeNo} <br /> {receipt.depositBank ? 'DATE ' + receipt.depositDate : ''} </td>
               <td></td>
-              <td>{receipt.depositBank ? 'DATE ' + receipt.depositDate : ''}</td>
-              <td>{receipt.depositBank}</td>
+              <td>{receipt.depositBank ? receipt.depositBank : ''}</td>
+              <td></td>
               <td>{receipt.amount.toFixed(2)}</td>
             </tr>
           </tbody>
@@ -264,16 +264,6 @@ export default function ReceiptPreview({ receipt }) {
             <div>(Authorized Signatory)</div>
           </div>
         </div>
-      </div>
-
-      {/* Print Button */}
-      <div className="mt-6 text-center">
-        <button
-          onClick={() => window.print()}
-          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-8 rounded-md transition duration-200"
-        >
-          Print Receipt
-        </button>
       </div>
     </div>
   );
