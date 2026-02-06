@@ -24,43 +24,9 @@ export default function Home() {
     }
   };
 
-  const handleDownloadPDF = async () => {
-    if (!receipt) return;
 
-    setLoading(true);
-    try {
-      const response = await fetch('/api/generate-pdf', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(receipt),
-      });
 
-      if (!response.ok) {
-        throw new Error('Failed to generate PDF');
-      }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `receipt-${receipt.receiptNo}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-
-      alert('Receipt saved to database and PDF downloaded!');
-    } catch (error) {
-      console.error('Error downloading PDF:', error);
-      alert('Failed to download PDF');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-    const handleViewReceipt = (receiptData) => {
+  const handleViewReceipt = (receiptData) => {
     setReceipt(receiptData);
     setActiveTab('preview');
   };
@@ -84,8 +50,8 @@ export default function Home() {
             <button
               onClick={() => setActiveTab('create')}
               className={`px-6 py-3 rounded-md font-semibold transition-all duration-200 ${activeTab === 'create'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-600 hover:text-gray-900'
                 }`}
             >
               Create Receipt
@@ -93,8 +59,8 @@ export default function Home() {
             <button
               onClick={() => setActiveTab('preview')}
               className={`px-6 py-3 rounded-md font-semibold transition-all duration-200 ${activeTab === 'preview'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-600 hover:text-gray-900'
                 }`}
               disabled={!receipt}
             >
@@ -103,8 +69,8 @@ export default function Home() {
             <button
               onClick={() => setActiveTab('history')}
               className={`px-6 py-3 rounded-md font-semibold transition-all duration-200 ${activeTab === 'history'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-600 hover:text-gray-900'
                 }`}
             >
               Receipt History
@@ -121,19 +87,12 @@ export default function Home() {
           {activeTab === 'preview' && receipt && (
             <div className="space-y-6">
               <ReceiptPreview receipt={receipt} />
-              <div className="flex justify-center gap-4">
+              <div className="flex justify-center">
                 <button
                   onClick={() => setActiveTab('create')}
                   className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-md transition duration-200"
                 >
                   Create New Receipt
-                </button>
-                <button
-                  onClick={handleDownloadPDF}
-                  disabled={loading}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-md transition duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                  {loading ? 'Generating PDF...' : 'Download PDF & Save'}
                 </button>
               </div>
             </div>
@@ -142,7 +101,7 @@ export default function Home() {
           {activeTab === 'history' && (
             <ReceiptHistory onViewReceipt={handleViewReceipt} />
           )}
-          
+
         </div>
       </div>
     </main>

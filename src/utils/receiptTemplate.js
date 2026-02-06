@@ -96,7 +96,8 @@ export function generateReceiptHTML(receipt) {
         }
 
         .data-table th {
-          padding: 4px 6px;
+          padding: 9px 6px;
+          padding-top: 2px;
           font-weight: bold;
           text-align: center;
           font-size: 10px;

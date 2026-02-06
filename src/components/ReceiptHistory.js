@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { generateReceiptHTML } from '../utils/receiptTemplate';
 
 export default function ReceiptHistory({ onViewReceipt }) {
     const [receipts, setReceipts] = useState([]);
@@ -58,27 +59,18 @@ export default function ReceiptHistory({ onViewReceipt }) {
 
     const handleDownloadPDF = async (receipt) => {
         try {
-            const response = await fetch('/api/generate-pdf', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(receipt),
-            });
+            const html2pdf = (await import('html2pdf.js')).default;
+            const htmlContent = generateReceiptHTML(receipt);
 
-            if (!response.ok) {
-                throw new Error('Failed to generate PDF');
-            }
+            const opt = {
+                margin: [5, 5, 5, 5],
+                filename: `receipt-${receipt.receiptNo}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { format: 'a4', orientation: 'portrait' },
+            };
 
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `receipt-${receipt.receiptNo}.pdf`;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
+            html2pdf().set(opt).from(htmlContent).save();
         } catch (err) {
             console.error('Error downloading PDF:', err);
             alert('Failed to download PDF');

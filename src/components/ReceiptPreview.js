@@ -1,10 +1,43 @@
 'use client';
 
+import { useRef } from 'react';
+
 export default function ReceiptPreview({ receipt }) {
+  const receiptRef = useRef(null);
+
+  const downloadPDF = async () => {
+    if (!receiptRef.current) return;
+
+    const response = await fetch('/api/save-receipt', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(receipt),
+    });
+
+    if (!response.ok) {
+      alert('Failed to save receipt before downloading PDF.');
+      return;
+    }
+    // Download PDF using html2pdf.js
+    const html2pdf = (await import('html2pdf.js')).default;
+    const element = receiptRef.current;
+    const opt = {
+      margin: [0, 0, 0, 0],
+      filename: `receipt-${receipt.receiptNo}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { format: 'a4', orientation: 'portrait' },
+    };
+
+    html2pdf().set(opt).from(element).save();
+  };
+
   if (!receipt) return null;
 
   return (
-    <div className="receipt-preview-container p-4">
+    <div className="receipt-preview-container p-4 ">
       <style jsx>{`
         .receipt-container {
           width: 100%;
@@ -71,7 +104,8 @@ export default function ReceiptPreview({ receipt }) {
         }
 
         .data-table th {
-          padding: 4px 6px;
+          padding: 9px 6px;
+          padding-top: 2px;
           font-weight: bold;
           text-align: center;
           font-size: 10px;
@@ -140,7 +174,7 @@ export default function ReceiptPreview({ receipt }) {
         }
       `}</style>
 
-      <div className="receipt-container font-bold overflow-auto">
+      <div ref={receiptRef} className="receipt-container font-bold overflow-auto p-0" style={{ background: 'white' }}>
         {/* Header */}
         <div className="receipt-header">
           <div className="receipt-title">RECEIPT</div>
@@ -264,6 +298,21 @@ export default function ReceiptPreview({ receipt }) {
             <div>(Authorized Signatory)</div>
           </div>
         </div>
+      </div>
+
+      <div className="mt-6 flex gap-2 justify-center">
+        <button
+          onClick={downloadPDF}
+          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Download PDF
+        </button>
+        <button
+          onClick={() => window.print()}
+          className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+        >
+          Print
+        </button>
       </div>
     </div>
   );
