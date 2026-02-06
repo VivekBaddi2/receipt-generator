@@ -1,12 +1,10 @@
 import puppeteer from "puppeteer";
 
-const isRender = !!process.env.RENDER;
 export async function generatePDF(htmlContent) {
   let browser;
 
   try {
     browser = await puppeteer.launch({
-      executablePath: isRender ? "/usr/bin/chromium" : undefined,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       headless: true,
     });
