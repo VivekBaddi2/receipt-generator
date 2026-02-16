@@ -73,7 +73,11 @@ const ReceiptSchema = new mongoose.Schema({
   for: {
     type: String,
     default: '',
-  }
+  },
+  seal: {
+    type: String,
+    default: '',
+  },
 }, {
   timestamps: true,
 });

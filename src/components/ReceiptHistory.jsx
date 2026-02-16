@@ -93,6 +93,8 @@ export default function ReceiptHistory({ onViewReceipt }) {
         return matchesSearch && matchesBank;
     });
 
+    console.log(receipts)
+
     if (loading) {
         return (
             <div className="bg-white p-8 rounded-lg shadow-md text-center">

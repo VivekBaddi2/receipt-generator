@@ -1,5 +1,5 @@
 export function generateReceiptHTML(receipt) {
-  return `
+    return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,328 +7,346 @@ export function generateReceiptHTML(receipt) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Receipt - ${receipt.receiptNo}</title>
   <style>
-    @page {
+    @page{
       size: A4;
       margin: 5mm;
     }
-
-    * {
+    *{
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
-    body {
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 11pt;
-      font-weight: bold;
-      line-height: 1.3;
-      color: #000;
-      background: #fff;
-    }
-
-    .receipt-container {
-          width: 100%;
-          max-width: 1000px;
-          margin: 0 auto;
-          font-family: 'Times New Roman', Times, serif;
-          background: white;
+    .container {
+            padding: 4px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            font-family: 'Times New Roman', Times, serif;
+            background: white;
         }
 
-     .receipt-header {
-          text-align: center;
-          padding-bottom: 4px;
-          padding-top: 4px;
+        .heading {
+            text-align: center;
         }
 
-        .receipt-title {
-          font-size: 28px;
-          font-weight: bold;
-          letter-spacing: 2px;
+        .heading h1 {
+            font-size: 28px;
         }
 
-   .version-number {
-          text-align: right;
-          font-size: 10px;
-          padding: 2px 12px;
+        .releaseVersion {
+            width: 100%;
+            font-size: 8px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: right;
         }
 
-        .info-section {
-          display: table;
-          width: 100%;
-          border-collapse: collapse;
+        .receiptDataContainer {
+            display: flex;
+            gap: 24px;
+            font-weight: bold;
+            font-size: 10px;
+            width: 100%;
+            margin: auto auto;
+            margin-bottom: 8px;
         }
 
-        .info-row {
-          display: table-row;
+        .leftDiv {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
-     .info-cell {
-          display: table-cell;
-          padding: 0px 12px;
-          vertical-align: top;
-          font-size: 12px;
+        .rightDiv {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
-        .info-label {
-          font-weight: bold;
-          width: 15%;
+        .row {
+            display: flex;
+            width: full;
         }
 
-        .info-value {
-          width: 25%;
+        .row .rowLabel {
+            width: 30%;
         }
 
-        .address-cell {
-          width: 10%;
-          border:none;
+        .row .rowValue {
+            display: flex;
+            gap: 16px;
         }
 
-    .table-section {
-      margin-top: 10px;
-    }
-
-    .data-table {
-        margin-top: 12px;
-          width: 100%;
-          height: 150px;
-          border-collapse: collapse;
+        .colon {
+            width: 10%;
         }
 
-        .data-table th {
-          padding: 9px 6px;
-          padding-top: 2px;
-          font-weight: bold;
-          text-align: center;
-          font-size: 10px;
-          border-top: 2px solid black;
-          border-bottom: 2px solid black;
+        #address {
+            min-height: 50px;
         }
 
+        #address .rowValue{
+          width: 60%;
+          text-wrap: wrap;
+        }
+        .table {
+            width: 100%;
+            font-size: 10px;
+            font-weight: bold;
+            margin: auto auto;
+            margin-top: 2px;
+            page-break-inside: avoid;
+        }
 
-   .data-table td {
-          padding: 4px 6px;
-          font-size: 11px;
-          text-align: center;
-          vertical-align: top;
+        .data-table {
+            border-collapse: collapse;
+            height: 120px;
+            width: 100%;
+            table-layout: fixed; 
+        }
+
+        thead tr th {
+            border: 2px solid black;
+            border-right: 0px;
+            border-left: 0px;
+            box-sizing: border-box; 
+            padding-bottom: 8px;
+        }
+
+        tbody tr td {
+            padding-top: 2px;
+            text-align: center;
+            vertical-align: top;
+            box-sizing: border-box; 
         }
 
         .total-section {
-          display: table;
-          width: 100%;
+            display: table;
+            width: 100%;
+            margin: auto auto;
+            font-weight: bold;
         }
 
-    .total-row {
-          display: table-row;
+        .total-row {
+            display: table-row;
         }
 
         .total-label {
-          display: table-cell;
-          padding: 4px 12px;
-          border-top: 2px solid #000;
-          width: 100%;
-          font-size: 11px;
-          font-weight: bold;
+            display: table-cell;
+            padding: 4px 12px;
+            padding-left: 0px;
+            border-top: 2px solid #000;
+            width: 100%;
+            font-size: 10px;
+            font-weight: bold;
         }
 
-    .total-value {
-          display: table-cell;
-          font-size: 11px;
-          font-weight: 700;
-          padding: 4px 12px;
-          border-top: 2px solid #000;
-          border-left: none;
-          text-align: center;
-          width: 20%;
+        .total-value {
+            display: table-cell;
+            font-size: 10px;
+            padding: 4px 12px;
+            border-top: 2px solid #000;
+            border-left: none;
+            text-align: center;
+            width: 20%;
         }
 
         .amount-words {
+            width: 100%;
+            margin: auto auto;
+            padding: 0px 12px;
+            padding-left: 0px;
+            font-size: 11px;
+        }
+        .terms-signature-container{
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 10px;
+            width: 100%;
+            margin: auto auto;
+            margin-bottom: 20px
+        }
+        .amount-words {
           padding: 0px 12px;
-          font-size: 11px;
+          font-size: 10px;
         }
 
-        .footer{
-          display: flex;
-          justify-content: space-between;
-        }
-
-  .terms-section {
+        .terms-section {
           width: 60%;
-          padding: 12px;
+          padding: 0px 12px;
+          padding-left: 0px;
           font-size: 10px;
           line-height: 1.6;
         }
 
-    .terms-title {
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-
-     .signature-section {
-          display: flex;
-          flex-direction: column;
-          gap: 64px;
-          align-items: flex-end;
-          font-weight: 700;
+        .signature-section {
           width: 40%;
-          padding: 12px;
+          padding: 0px 12px;
           min-height: 50px;
-          font-size: 12px;
+          font-size: 10px;
         }
 
-    .for-autofin {
-      font-size: 10pt;
-    }
-
-    .authorized-signatory {
-      font-size: 10pt;
-      text-align: right;
-    }
-
-    .col-sr { width: 5%; }
-    .col-mode { width: 12%; }
-    .col-dd { width: 15%; }
-    .col-favour { width: 12%; }
-    .col-deposit { width: 15%; }
-    .col-bank { width: 26%; }
-    .col-amount { width: 15%; }
-
-    @media print {
-      body {
-        margin: 0;
-        padding: 0;
+        @media print {
+          .container {
+            padding: 0px 28px;
+            margin: 0px;
+          }
       }
-    }
   </style>
 </head>
 <body>
-  <div class="receipt-container">
-    <!-- Header -->
-    <div class="receipt-header">
-      <div class="receipt-title">RECEIPT</div>
+ <div class="container" style="background: white; font-weight: bold; overflow: auto; padding: 0px">
+    <div class="heading">
+        <h1>RECEIPT</h1>
     </div>
-
-    <!-- Version Number -->
-    <div class="version-number">Rel 2.0.12</div>
-
-    <!-- Info Section -->
-    <div class="info-section">
-      <div class="info-row">
-        <div class="info-cell info-label">Receipt No.</div>
-        <div class="info-cell info-value">: ${receipt.receiptNo}</div>
-        <div class="info-cell info-label">Receipt Date</div>
-        <div class="info-cell info-value">: ${receipt.receiptDate}</div>
-      </div>
-      
-      <div class="info-row">
-        <div class="info-cell info-label">Name</div>
-        <div class="info-cell info-value">: ${receipt.name}</div>
-        <div class="info-cell info-label">Customer ID</div>
-        <div class="info-cell info-value">: ${receipt.customerId}</div>
-      </div>
-      
-      <div class="info-row address-row">
-        <div class="info-cell info-label">Address</div>
-        <div class="info-cell address-cell">: ${receipt.address}</div>
-        <div class="info-cell info-label">Receipt Amount</div>
-        <div class="info-cell info-value">: ${receipt.amount.toFixed(2)}</div>
-      </div>
-      
-      <div class="info-row">
-        <div class="info-cell info-label"></div>
-        <div class="info-cell info-value"></div>
-        <div class="info-cell info-label">Hypothecated To</div>
-        <div class="info-cell info-value">: ${receipt.hypothecatedTo}</div>
-      </div>
-      
-      <div class="info-row">
-        <div class="info-cell info-label"></div>
-        <div class="info-cell info-value"></div>
-        <div class="info-cell info-label">Proprietor</div>
-        <div class="info-cell info-value">: ${receipt.proprietor}</div>
-      </div>
-      
-      <div class="info-row">
-        <div class="info-cell info-label">Remark</div>
-        <div class="info-cell info-value">: ${receipt.remark}</div>
-        <div class="info-cell info-label"></div>
-        <div class="info-cell info-value"></div>
-      </div>
-      
-      <div class="info-row">
-        <div class="info-cell info-label">Order/Inv No</div>
-        <div class="info-cell info-value">: ${receipt.orderType}</div>
-        <div class="info-cell info-label"></div>
-        <div class="info-cell info-value"></div>
-      </div>
-      
-      <div class="info-row">
-        <div class="info-cell info-label">Model</div>
-        <div class="info-cell info-value">: ${receipt.model}</div>
-        <div class="info-cell info-label"></div>
-        <div class="info-cell info-value"></div>
-      </div>
+    <div class="releaseVersion">
+        Rel 2.0.12
     </div>
-
-    <!-- Table Section -->
-    <div class="table-section">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th class="col-sr">Sr1.</th>
-            <th class="col-mode">Mode</th>
-            <th class="col-dd">DD/CC/CHQ No.Date</th>
-            <th class="col-favour">Favouring</th>
-            <th class="col-deposit">D1/Deposit Bank Name</th>
-            <th class="col-bank"></th>
-            <th class="col-amount">Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-         <tr>
-              <td>1</td>
-              <td>${receipt.paymentMode}</td>
-              <td>${receipt.chequeNo} <br /> ${receipt.depositBank ? 'DATE ' + receipt.depositDate : ''} </td>
-              <td></td>
-              <td>${receipt.depositBank ? receipt.depositBank : ''}</td>
-              <td></td>
-              <td>${receipt.amount.toFixed(2)}</td>
-            </tr>
-        </tbody>
-      </table>
-      
-      <div style="display: table; width: 100%;">
+    <div class="receiptDataContainer">
+        <div class="leftDiv">
+            <div class="row">
+                <div class="rowLabel">Receipt No</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div>${receipt.receiptNo}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLabel">Name</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div>${receipt.name.toUpperCase()}</div>
+                </div>
+            </div>
+            <div id="address" class="row">
+                <div class="rowLabel">Address</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div style="width: 100%;">${receipt.address.toUpperCase()}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLabel">Remark</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div>${receipt.remark}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLabel">Order/Inv No</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div>${receipt.orderType}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLabel">Model</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div>${receipt.model === "Other" ? receipt.modelOther : receipt.model}</div>
+                </div>
+            </div>
+        </div>
+        <div class="rightDiv">
+            <div class="row">
+                <div class="rowLabel">Receipt Date</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div>${receipt.receiptDate}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLabel">Customer ID</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div>${receipt.customerId}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLabel">Receipt Amount</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div>${receipt.amount.toFixed(2)}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLabel">Hypothecated To</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div>${receipt.hypothecatedTo}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLabel">Proprietor</div>
+                <div class="rowValue">
+                    <div>:</div>
+                    <div>${receipt.proprietor.toUpperCase()}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">Srl.</th>
+                    <th style="width: 12%;">Mode</th>
+                    <th style="width: 15%;">DD/CC/CHQ No./UTR</th>
+                    <th style="width: 12%;">Favouring</th>
+                    <th style="width: 15%;">Deposit Date</th>
+                    <th style="width: 26%;"></th>
+                    <th style="width: 15%;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>${receipt.paymentMode}</td>
+                    <td>${receipt.chequeNo}</td>
+                    <td></td>
+                    <td>${receipt.depositDate}</td>
+                    <td></td>
+                    <td>${receipt.amount.toFixed(2)}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="total-section">
         <div class="total-row">
-          <div class="total-label">Total :</div>
-          <div class="total-value">${receipt.amount.toFixed(2)}</div>
+            <div class="total-label">Total :</div>
+            <div class="total-value">${receipt.amount.toFixed(2)}</div>
         </div>
-      </div>
     </div>
-
-    <!-- Amount in Words -->
-    <div class="amount-words">
-      <strong>Amounts in words : ${receipt.amountInWords}</strong>
+    <div class="amount-words" style="padding-left:0px">
+        <strong>Amounts in words : ${receipt.amountInWords}</strong>
     </div>
-
-    <div class="footer"> 
-      <!-- Terms and Conditions -->
-      <div class="terms-section">
-        <div class="terms-title">Terms and conditions</div>
-        <div>
-          <strong>1) This receipt issued subject to realisation of cheque / DD /Pay order / Cash prior notice <br> </strong>
-          <strong>2) Prices are subject to change without prior notice <br></strong>
-          <strong>3) Prices Ruling to same of dlivery will be Payment is received Original receipts is must be produced before taking delivery of vehicle <br> </strong>
-          <strong>4) This Receipt is valid after clearance of cheques/ DD. <br></strong>
+    <div class="terms-signature-container">
+        <div class="terms-section">
+            <div style="font-weight: bold;">Terms and conditions</div>
+            <div>
+                <strong>1)</strong> This receipt issued subject to realisation of cheque / DD /Pay order / Cash
+                <br />
+                <strong> 2)</strong> Prices are subject to change without prior notice <br />
+                <strong>3)</strong> Prices Ruling to same of dlivery will be Payment is received Original receipts
+                is must be produced before taking delivery of vehicle <br />
+                <strong>4)</strong> This Receipt is valid after clearance of cheques/ DD.
+            </div>
         </div>
-      </div>
-
-      <!-- Signature Section -->
-      <div class="signature-section">
-        <div class="for-autofin">For AUTOFIN LIMITED.</div>
-        <div class="authorized-signatory">(Authorized Signatory)</div>
-      </div>
+        <div class="signature-section relative flex flex-col gap-16 items-end font-bold">
+            <div>For ${receipt.for}</div>
+            <div>(Authorized Signatory)</div>
+            <div style="position: absolute; left: 65%; translate-y: -50%">
+                ${receipt.seal === "yes" && receipt.for === "OM SAI MOTORS PVT. LTD." ? `<img src="/Om sai motors.png" alt="Om sai motors seal" height="130px" width="130px" />` : ''}
+                ${receipt.seal === "yes" && receipt.for === "SEHGAL AUTORIDERS PVT. LTD." ? `<img src="/Sehgal Autoriders Pvt Ltd.png" alt="Sehgal autoriders seal" height="180px" width="180px" />` : ''}
+                ${receipt.seal === "yes" && receipt.for === "AUTOFIN LIMITED" ? `<img src="/Autofin Ltd.png" alt="Autofin Ltd Seal" height="110px" width="110px" />` : ''}
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 </body>
 </html>
   `;

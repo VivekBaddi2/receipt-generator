@@ -42,6 +42,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
     // depositBank: '',
     depositDate: new Date().toISOString().split('T')[0],
     for: '',
+    seal: '',
   });
 
   const handleChange = (e) => {
@@ -65,6 +66,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
       amountInWords,
       receiptDate,
       depositDate,
+      seal: formData.seal,
     };
 
     onSubmit(receipt);
@@ -307,9 +309,23 @@ export default function ReceiptForm({ onSubmit, loading }) {
           >
             <option value="">Select</option>
             <option value="OM SAI MOTORS PVT. LTD.">OM SAI MOTORS PVT. LTD.</option>
-            <option value="SENGAL AUTORIDERS PVT. LTD.">SENGAL AUTORIDERS PVT. LTD.</option>
+            <option value="SEHGAL AUTORIDERS PVT. LTD.">SEHGAL AUTORIDERS PVT. LTD.</option>
             <option value="SOMANI AUTOWHEELS LLP">SOMANI AUTOWHEELS LLP</option>
             <option value="AUTOFIN LIMITED">AUTOFIN LIMITED.</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">Seal Needed?</label>
+          <select
+            name='seal'
+            value={formData.seal}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
           </select>
         </div>
       </div>
