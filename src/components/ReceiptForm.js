@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { generateReceiptNumber, numberToIndianWords, formatDate } from '../utils/helpers';
 
 export default function ReceiptForm({ onSubmit, loading }) {
+  const [modelOther, setModelOther] = useState(false);
+
   // Fetch the next receipt number on component mount
   useEffect(() => {
     const fetchReceiptNumber = async () => {
@@ -34,10 +36,12 @@ export default function ReceiptForm({ onSubmit, loading }) {
     remark: 'For Vehicle allotment',
     orderType: 'TAXI',
     model: '',
+    modelOther: '',
     paymentMode: 'CASH',
     chequeNo: '',
-    depositBank: '',
+    // depositBank: '',
     depositDate: new Date().toISOString().split('T')[0],
+    for: '',
   });
 
   const handleChange = (e) => {
@@ -207,33 +211,54 @@ export default function ReceiptForm({ onSubmit, loading }) {
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Model
           </label>
-          <input
-            type="text"
+          <select
             name="model"
             value={formData.model}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-2"
             required
-          />
+          >
+            <option value="">Select</option>
+            <option value="ERTIGA VXI CNG (White)">ERTIGA VXI CNG (White)</option>
+            <option value="Other" onClick={() => {
+              console.log('Other model selected');
+              setModelOther(true)
+            }}>Other</option>
+          </select>
+          {formData.model == "Other" && (
+            <input
+              type="text"
+              name="modelOther"
+              value={formData.modelOther || ''}
+              onChange={handleChange}
+              placeholder="Enter model name"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-2"
+            />
+          )}
         </div>
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Payment Mode
           </label>
-          <input
-            type="text"
+          <select
+            required
             name="paymentMode"
             value={formData.paymentMode}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            required
-          />
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-2"
+          >
+            <option value="">Select</option>
+            <option value="Cash">Cash</option>
+            <option value="PhonePe">PhonePe</option>
+            <option value="Netbanking">Netbanking</option>
+            <option value="RTGS/NEFT">RTGS/NEFT</option>
+          </select>
         </div>
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            DD/CC/Cheque No
+            DD/CC/Cheque No/UTR
           </label>
           <input
             type="text"
@@ -244,7 +269,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
           />
         </div>
 
-        <div>
+        {/* <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Deposit Bank Name
           </label>
@@ -255,7 +280,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-        </div>
+        </div> */}
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -269,19 +294,39 @@ export default function ReceiptForm({ onSubmit, loading }) {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            For
+          </label>
+          <select
+            name='for'
+            value={formData.for}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="">Select</option>
+            <option value="OM SAI MOTORS PVT. LTD.">OM SAI MOTORS PVT. LTD.</option>
+            <option value="SENGAL AUTORIDERS PVT. LTD.">SENGAL AUTORIDERS PVT. LTD.</option>
+            <option value="SOMANI AUTOWHEELS LLP">SOMANI AUTOWHEELS LLP</option>
+            <option value="AUTOFIN LIMITED">AUTOFIN LIMITED.</option>
+          </select>
+        </div>
       </div>
 
       {/* Amount Preview */}
-      {formData.amount && (
-        <div className="p-4 bg-blue-50 rounded-md border border-blue-200">
-          <p className="text-sm font-semibold text-blue-900">
-            Amount in Words:
-          </p>
-          <p className="text-lg text-blue-800 mt-1">
-            {numberToIndianWords(parseFloat(formData.amount))}
-          </p>
-        </div>
-      )}
+      {
+        formData.amount && (
+          <div className="p-4 bg-blue-50 rounded-md border border-blue-200">
+            <p className="text-sm font-semibold text-blue-900">
+              Amount in Words:
+            </p>
+            <p className="text-lg text-blue-800 mt-1">
+              {numberToIndianWords(parseFloat(formData.amount))}
+            </p>
+          </div>
+        )
+      }
 
       <button
         type="submit"
@@ -290,6 +335,6 @@ export default function ReceiptForm({ onSubmit, loading }) {
       >
         {loading ? 'Generating Receipt...' : 'Generate Receipt'}
       </button>
-    </form>
+    </form >
   );
 }

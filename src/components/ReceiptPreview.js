@@ -236,7 +236,7 @@ export default function ReceiptPreview({ receipt }) {
 
           <div className="info-row">
             <div className="info-cell info-label">Model :</div>
-            <div className="info-cell info-value">{receipt.model}</div>
+            <div className="info-cell info-value">{receipt.model == "Other" ? receipt.modelOther : receipt.model}</div>
             <div className="info-cell info-label"></div>
             <div className="info-cell info-value"></div>
           </div>
@@ -248,9 +248,9 @@ export default function ReceiptPreview({ receipt }) {
             <tr>
               <th style={{ width: '5%' }}>Srl.</th>
               <th style={{ width: '12%' }}>Mode</th>
-              <th style={{ width: '15%' }}>DD/CC/CHQ No.Date</th>
+              <th style={{ width: '15%' }}>DD/CC/Cheque No/UTR</th>
               <th style={{ width: '12%' }}>Favouring</th>
-              <th style={{ width: '15%' }}>D1/Deposit Bank Name</th>
+              <th style={{ width: '15%' }}>Deposit Date</th>
               <th style={{ width: '26%' }}></th>
               <th style={{ width: '15%' }}>Amount</th>
             </tr>
@@ -259,9 +259,9 @@ export default function ReceiptPreview({ receipt }) {
             <tr>
               <td>1</td>
               <td>{receipt.paymentMode}</td>
-              <td>{receipt.chequeNo} <br /> {receipt.depositBank ? 'DATE ' + receipt.depositDate : ''} </td>
+              <td>{receipt.chequeNo}</td>
               <td></td>
-              <td>{receipt.depositBank ? receipt.depositBank : ''}</td>
+              <td>{receipt.depositDate}</td>
               <td></td>
               <td>{receipt.amount.toFixed(2)}</td>
             </tr>
@@ -294,7 +294,7 @@ export default function ReceiptPreview({ receipt }) {
 
           {/* Signature Section */}
           <div className="signature-section flex flex-col gap-16 items-end font-bold">
-            <div>For AUTOFIN LIMITED.</div>
+            <div>For {receipt.for}</div>
             <div>(Authorized Signatory)</div>
           </div>
         </div>

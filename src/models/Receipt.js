@@ -50,22 +50,30 @@ const ReceiptSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  modelOther: {
+    type: String,
+    default: '',
+  },
   paymentMode: {
     type: String,
-    default: 'CASH',
+    required: true,
   },
   chequeNo: {
     type: String,
     default: '',
   },
-  depositBank: {
-    type: String,
-    default: '',
-  },
+  // depositBank: {
+  //   type: String,
+  //   default: '',
+  // },
   depositDate: {
     type: String,
     default: '',
   },
+  for: {
+    type: String,
+    default: '',
+  }
 }, {
   timestamps: true,
 });
