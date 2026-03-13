@@ -358,6 +358,24 @@ export default function ReceiptPreview({ receipt }) {
               {receipt.seal === "yes" && receipt.for === "AUTOFIN LIMITED" && (
                 <img src="/Autofin Ltd.png" alt="Autofin Ltd Seal" height={"110px"} width={"110px"} />
               )}
+              {receipt.seal === "yes" && receipt.for === "SUMANKIRTI CARS PVT. LTD." && (
+                <img src="/Sumankirti.png" alt="Sumankirti Cars Pvt Ltd Seal" height={"100px"} width={"100px"} />
+              )}
+              {receipt.seal === "yes" && receipt.for === "Varun Motors Pvt. Ltd." && (
+                <img src="/Varun Motors pvt ltd.png" alt="Varun Motors Pvt Ltd Seal" height={"100px"} width={"100px"} />
+              )}
+              {receipt.seal === "yes" && receipt.for === "Sai Point Cars Pvt. Ltd." && (
+                <img src="/Sai Point Cars pvt ltd.png" alt="Sai Point Cars Pvt Ltd Seal" height={"100px"} width={"100px"} />
+              )}
+              {receipt.seal === "yes" && receipt.for === "Kothari Auto Wheels Pvt. Ltd." && (
+                <img src="/Kothari Auto Wheels pvt ltd.png" alt="Kothari Auto Wheels Pvt Ltd Seal" height={"110px"} width={"110px"} />
+              )}
+              {receipt.seal === "yes" && receipt.for === "MSA Motors" && (
+                <img src="/MSA motors.png" alt="MSA Motors Seal" height={"100px"} width={"100px"} />
+              )}
+              {receipt.seal === "yes" && receipt.for === "Adarsha Automotives Pvt. Ltd." && (
+                <img src="/Adarsha automotives pvt ltd.png" alt="Adarsha Automotives Pvt Ltd Seal" height={"100px"} width={"100px"} />
+              )}
             </div>
           </div>
         </div>

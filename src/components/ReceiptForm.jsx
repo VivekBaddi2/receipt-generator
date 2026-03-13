@@ -312,6 +312,12 @@ export default function ReceiptForm({ onSubmit, loading }) {
             <option value="SEHGAL AUTORIDERS PVT. LTD.">SEHGAL AUTORIDERS PVT. LTD.</option>
             <option value="SOMANI AUTOWHEELS LLP">SOMANI AUTOWHEELS LLP</option>
             <option value="AUTOFIN LIMITED">AUTOFIN LIMITED.</option>
+            <option value="SUMANKIRTI CARS PVT. LTD.">SUMANKIRTI CARS PVT. LTD.</option>
+            <option value="Varun Motors Pvt. Ltd.">Varun Motors Pvt. Ltd.</option>
+            <option value="Sai Point Cars Pvt. Ltd.">Sai Point Cars Pvt. Ltd.</option>
+            <option value="Kothari Auto Wheels Pvt. Ltd.">Kothari Auto Wheels Pvt. Ltd.</option>
+            <option value="MSA Motors">MSA Motors</option>
+            <option value="Adarsha Automotives Pvt. Ltd.">Adarsha Automotives Pvt. Ltd.</option>
           </select>
         </div>
 
