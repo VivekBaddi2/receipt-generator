@@ -5,6 +5,7 @@ import { generateReceiptNumber, numberToIndianWords, formatDate } from '../utils
 
 export default function ReceiptForm({ onSubmit, loading }) {
   const [modelOther, setModelOther] = useState(false);
+  const [hypothecatedOther, setHypothecatedOther] = useState(false);
 
   // Fetch the next receipt number on component mount
   useEffect(() => {
@@ -31,7 +32,8 @@ export default function ReceiptForm({ onSubmit, loading }) {
     customerId: '2458017400',
     address: '',
     amount: '',
-    hypothecatedTo: 'AU SMALL FINANCE BANK',
+    hypothecatedTo: '',
+    hypothecatedOther: '',
     proprietor: '',
     remark: 'For Vehicle allotment',
     orderType: 'TAXI',
@@ -170,13 +172,26 @@ export default function ReceiptForm({ onSubmit, loading }) {
             value={formData.hypothecatedTo}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            required
           >
+            <option value="">Select Option</option>
             <option value="AU SMALL FINANCE BANK">AU SMALL FINANCE BANK</option>
             <option value="State Bank Of India">State Bank Of India</option>
             <option value="Cholamandalam Investment and Finance">Cholamandalam Investment and Finance</option>
             <option value="Federal Bank">Federal Bank</option>
+            <option value="Other" onClick={() => {
+              setHypothecatedOther(true)
+            }}>Other</option>
           </select>
+          {formData.hypothecatedTo == "Other" && (
+            <input
+              type="text"
+              name="hypothecatedOther"
+              value={formData.hypothecatedOther || ''}
+              onChange={handleChange}
+              placeholder="Enter hypothecated to name"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-2"
+            />
+          )}
         </div>
 
         <div>
@@ -189,7 +204,6 @@ export default function ReceiptForm({ onSubmit, loading }) {
             value={formData.proprietor}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            required
           />
         </div>
 
@@ -223,7 +237,6 @@ export default function ReceiptForm({ onSubmit, loading }) {
             <option value="">Select</option>
             <option value="ERTIGA VXI CNG (White)">ERTIGA VXI CNG (White)</option>
             <option value="Other" onClick={() => {
-              console.log('Other model selected');
               setModelOther(true)
             }}>Other</option>
           </select>

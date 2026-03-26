@@ -277,7 +277,7 @@ export function generateReceiptHTML(receipt) {
                 <div class="rowLabel">Hypothecated To</div>
                 <div class="rowValue">
                     <div>:</div>
-                    <div>${receipt.hypothecatedTo}</div>
+                    <div>${receipt.hypothecatedTo === "Other" ? receipt.hypothecatedOther : receipt.hypothecatedTo}</div>
                 </div>
             </div>
             <div class="row">

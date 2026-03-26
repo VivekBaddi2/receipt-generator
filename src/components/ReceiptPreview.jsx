@@ -286,7 +286,7 @@ export default function ReceiptPreview({ receipt }) {
               <div className="rowLabel">Hypothecated To</div>
               <div className="rowValue">
                 <div>:</div>
-                <div>{receipt.hypothecatedTo}</div>
+                <div>{receipt.hypothecatedTo === "Other" ? receipt.hypothecatedOther : receipt.hypothecatedTo}</div>
               </div>
             </div>
             <div className="row">

@@ -32,11 +32,15 @@ const ReceiptSchema = new mongoose.Schema({
   },
   hypothecatedTo: {
     type: String,
-    required: true,
+    required: false,
+  },
+  hypothecatedOther: {
+    type: String,
+    required: false,
   },
   proprietor: {
     type: String,
-    required: true,
+    required: false,
   },
   remark: {
     type: String,

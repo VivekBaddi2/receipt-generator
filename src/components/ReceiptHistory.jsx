@@ -93,8 +93,6 @@ export default function ReceiptHistory({ onViewReceipt }) {
         return matchesSearch && matchesBank;
     });
 
-    console.log(receipts)
-
     if (loading) {
         return (
             <div className="bg-white p-8 rounded-lg shadow-md text-center">
@@ -217,11 +215,11 @@ export default function ReceiptHistory({ onViewReceipt }) {
                                         </div>
                                         <div>
                                             <span className="text-gray-600">Model:</span>{' '}
-                                            <span className="font-semibold text-gray-900">{receipt.model}</span>
+                                            <span className="font-semibold text-gray-900">{receipt.model === "Other" ? receipt.modelOther : receipt.model}</span>
                                         </div>
                                         <div>
                                             <span className="text-gray-600">Bank:</span>{' '}
-                                            <span className="font-semibold text-gray-900">{receipt.hypothecatedTo}</span>
+                                            <span className="font-semibold text-gray-900">{receipt.hypothecatedTo === "Other" ? receipt.hypothecatedOther : receipt.hypothecatedTo}</span>
                                         </div>
                                     </div>
                                 </div>
