@@ -78,6 +78,10 @@ const ReceiptSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+    forOther: {
+    type: String,
+    required: false,
+  },
   seal: {
     type: String,
     default: '',

@@ -337,7 +337,7 @@ export function generateReceiptHTML(receipt) {
             </div>
         </div>
         <div class="signature-section relative flex flex-col gap-16 items-end font-bold">
-            <div>For ${receipt.for}</div>
+            <div>For ${receipt.for === "Other" ? receipt.forOther : receipt.for}</div>
             <div>(Authorized Signatory)</div>
             <div style="position: absolute; left: 65%; translate-y: -50%">
                 ${receipt.seal === "yes" && receipt.for === "OM SAI MOTORS PVT. LTD." ? `<img src="/Om sai motors.png" alt="Om sai motors seal" height="130px" width="130px" />` : ''}

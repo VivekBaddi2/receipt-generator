@@ -6,6 +6,7 @@ import { generateReceiptNumber, numberToIndianWords, formatDate } from '../utils
 export default function ReceiptForm({ onSubmit, loading }) {
   const [modelOther, setModelOther] = useState(false);
   const [hypothecatedOther, setHypothecatedOther] = useState(false);
+  const [forOther, setForOther] = useState(false);
 
   // Fetch the next receipt number on component mount
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
     // depositBank: '',
     depositDate: new Date().toISOString().split('T')[0],
     for: '',
+    forOther: '',
     seal: '',
   });
 
@@ -80,7 +82,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
         {/* Receipt Details */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Receipt No.
+            Receipt No. <span className='text-xs text-red-500'>(required)</span>
           </label>
           <input
             type="text"
@@ -94,7 +96,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Receipt Date
+            Receipt Date <span className='text-xs text-red-500'>(required)</span>
           </label>
           <input
             type="date"
@@ -108,7 +110,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Name
+            Name <span className='text-xs text-red-500'>(required)</span>
           </label>
           <input
             type="text"
@@ -136,7 +138,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div className="md:col-span-2">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Address
+            Address <span className='text-xs text-red-500'>(required)</span>
           </label>
           <textarea
             name="address"
@@ -150,7 +152,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Receipt Amount (₹)
+            Receipt Amount (₹) <span className='text-xs text-red-500'>(required)</span>
           </label>
           <input
             type="number"
@@ -165,7 +167,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Hypothecated To
+            Hypothecated To <span className='text-xs'>(optional)</span>
           </label>
           <select
             name="hypothecatedTo"
@@ -196,7 +198,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Proprietor
+            Proprietor <span className='text-xs'>(optional)</span>
           </label>
           <input
             type="text"
@@ -209,7 +211,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Order/Inv No
+            Order/Inv No <span className='text-xs text-red-500'>(required)</span>
           </label>
           <select
             name="orderType"
@@ -225,7 +227,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Model
+            Model <span className='text-xs text-red-500'>(required)</span>
           </label>
           <select
             name="model"
@@ -254,7 +256,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Payment Mode
+            Payment Mode <span className='text-xs text-red-500'>(required)</span>
           </label>
           <select
             required
@@ -273,7 +275,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            DD/CC/Cheque No/UTR
+            DD/CC/Cheque No/UTR <span className='text-xs'>(optional)</span>
           </label>
           <input
             type="text"
@@ -299,8 +301,8 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Deposit Date
-          </label>
+            Deposit Date <span className='text-xs'>(optional)</span>
+          </label> 
           <input
             type="date"
             name="depositDate"
@@ -312,7 +314,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            For
+            For <span className='text-xs'>(optional)</span>
           </label>
           <select
             name='for'
@@ -331,11 +333,24 @@ export default function ReceiptForm({ onSubmit, loading }) {
             <option value="Kothari Auto Wheels Pvt. Ltd.">Kothari Auto Wheels Pvt. Ltd.</option>
             <option value="MSA Motors">MSA Motors</option>
             <option value="Adarsha Automotives Pvt. Ltd.">Adarsha Automotives Pvt. Ltd.</option>
+            <option value="Other" onClick={() => {
+              setForOther(true)
+            }}>Other</option>
           </select>
+          {formData.for === "Other" && (
+            <input
+              type="text"
+              name="forOther"
+              value={formData.forOther || ''}
+              onChange={handleChange}
+              placeholder="Enter for name"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-2"
+            />
+          )}
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Seal Needed?</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">Seal Needed? <span className='text-xs'>(optional)</span></label>
           <select
             name='seal'
             value={formData.seal}
