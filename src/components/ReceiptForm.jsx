@@ -270,6 +270,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
             <option value="PhonePe">PhonePe</option>
             <option value="Netbanking">Netbanking</option>
             <option value="RTGS/NEFT">RTGS/NEFT</option>
+            <option value="Cheque">Cheque</option>
           </select>
         </div>
 
