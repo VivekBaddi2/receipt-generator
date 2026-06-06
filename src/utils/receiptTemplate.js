@@ -199,7 +199,7 @@ export function generateReceiptHTML(receipt) {
   </style>
 </head>
 <body>
- <div class="container" style="background: white; font-weight: bold; overflow: auto; padding: 0px">
+ <div class="container" style="background: white; font-weight: bold; overflow: auto; padding: 0px;">
     <div class="heading">
         <h1>RECEIPT</h1>
     </div>
@@ -349,6 +349,7 @@ export function generateReceiptHTML(receipt) {
                 ${receipt.seal === "yes" && receipt.for === "Kothari Auto Wheels Pvt. Ltd." ? `<img src="/Kothari Auto Wheels pvt ltd.png" alt="Kothari Auto Wheels Pvt Ltd Seal" height="110px" width="110px" />` : ''}
                 ${receipt.seal === "yes" && receipt.for === "MSA Motors" ? `<img src="/MSA motors.png" alt="MSA Motors Seal" height="110px" width="110px" />` : ''}
                 ${receipt.seal === "yes" && receipt.for === "Adarsha Automotives Pvt. Ltd." ? `<img src="/Adarsha automotives pvt ltd.png" alt="Adarsha Automotives Pvt Ltd Seal" height="110px" width="110px" />` : ''}
+                ${receipt.seal === "yes" && receipt.for === "Kiran Motors Limited" ? `<img src="/kiran-motors.png" alt="Kiran Motors Limited Seal" height="110px" width="110px" />` : ''}
             </div>
         </div>
     </div>

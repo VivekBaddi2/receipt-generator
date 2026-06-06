@@ -303,7 +303,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Deposit Date <span className='text-xs'>(optional)</span>
-          </label> 
+          </label>
           <input
             type="date"
             name="depositDate"
@@ -334,6 +334,7 @@ export default function ReceiptForm({ onSubmit, loading }) {
             <option value="Kothari Auto Wheels Pvt. Ltd.">Kothari Auto Wheels Pvt. Ltd.</option>
             <option value="MSA Motors">MSA Motors</option>
             <option value="Adarsha Automotives Pvt. Ltd.">Adarsha Automotives Pvt. Ltd.</option>
+            <option value="Kiran Motors Limited">Kiran Motors Limited</option>
             <option value="Other" onClick={() => {
               setForOther(true)
             }}>Other</option>

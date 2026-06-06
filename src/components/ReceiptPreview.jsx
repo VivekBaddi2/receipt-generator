@@ -376,6 +376,9 @@ export default function ReceiptPreview({ receipt }) {
               {receipt.seal === "yes" && receipt.for === "Adarsha Automotives Pvt. Ltd." && (
                 <img src="/Adarsha automotives pvt ltd.png" alt="Adarsha Automotives Pvt Ltd Seal" height={"100px"} width={"100px"} />
               )}
+              {receipt.seal === "yes" && receipt.for === "Kiran Motors Limited" && (
+                <img src="/kiran-motors.png" alt="Kiran Motors Limited Seal" height={"100px"} width={"100px"} />
+              )}
             </div>
           </div>
         </div>
